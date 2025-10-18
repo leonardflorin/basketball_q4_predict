@@ -167,10 +167,15 @@
             background: #ee6c4d;
         }
 
-        .predict-btn {
-            width: auto;
-            padding: 15px;
+        .button-container {
+            display: flex;
+            gap: 10px;
             margin-top: 20px;
+        }
+
+        .predict-btn {
+            flex: 1;
+            padding: 15px;
             background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
             border: none;
             border-radius: 12px;
@@ -184,6 +189,29 @@
         }
 
         .predict-btn:active {
+            transform: scale(0.98);
+        }
+
+        .reset-btn {
+            flex: 0 0 auto;
+            padding: 15px 25px;
+            background: #2a2a3e;
+            border: none;
+            border-radius: 12px;
+            color: #e0e0e0;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reset-btn:hover {
+            background: #3a3a4e;
+        }
+
+        .reset-btn:active {
             transform: scale(0.98);
         }
 
@@ -258,33 +286,6 @@
             font-weight: 600;
         }
 
-        .verification {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .verification button {
-            flex: 1;
-            padding: 8px;
-            border: none;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .correct-btn {
-            background: #4ecca3;
-            color: #1a1a2e;
-        }
-
-        .incorrect-btn {
-            background: #ee6c4d;
-            color: #1a1a2e;
-        }
-
         .verified {
             padding: 6px 12px;
             border-radius: 6px;
@@ -292,6 +293,12 @@
             font-weight: 600;
             display: inline-block;
             margin-top: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .verified:hover {
+            opacity: 0.8;
         }
 
         .verified.correct {
@@ -302,6 +309,11 @@
         .verified.incorrect {
             background: #ee6c4d;
             color: #1a1a2e;
+        }
+
+        .verified.unverified {
+            background: #3a3a4e;
+            color: #a0a0a0;
         }
 
         .no-games {
@@ -361,8 +373,7 @@
                             <th>Q1</th>
                             <th>Q2</th>
                             <th>Q3</th>
-                            <th>Q4 Pred</th>
-                            <th>Total</th>
+                            <th>Total Prediction</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -378,9 +389,6 @@
                             </td>
                             <td>
                                 <input type="number" class="quarter-input" id="team1Q3" min="0" data-team="1" data-quarter="3">
-                            </td>
-                            <td class="prediction-cell" id="team1Pred">
-                                <span class="prediction-value">-</span>
                             </td>
                             <td class="prediction-cell" id="team1Total">
                                 <span class="prediction-value">-</span>
@@ -399,9 +407,6 @@
                             <td>
                                 <input type="number" class="quarter-input" id="team2Q3" min="0" data-team="2" data-quarter="3">
                             </td>
-                            <td class="prediction-cell" id="team2Pred">
-                                <span class="prediction-value">-</span>
-                            </td>
                             <td class="prediction-cell" id="team2Total">
                                 <span class="prediction-value">-</span>
                             </td>
@@ -410,9 +415,9 @@
                 </table>
             </div>
 
-            <div style="display: flex; gap: 10px;">
-                <button class="predict-btn" onclick="calculatePrediction()" style="flex: 1;">Calculate Prediction</button>
-                <button class="predict-btn" onclick="resetPrediction()" style="flex: 0 0 auto; background: #2a2a3e; padding: 15px 25px;">Reset</button>
+            <div class="button-container">
+                <button class="predict-btn" onclick="calculatePrediction()">Calculate Prediction</button>
+                <button class="reset-btn" onclick="resetPrediction()">Reset</button>
             </div>
             <div id="saveButtonContainer"></div>
         </div>
@@ -453,36 +458,37 @@
             let prediction = 'unsafe';
             let confidence = 0;
             let total = 0;
-            let q4Value = 0;
 
-            if (q2 < q1 && q3 > q2) {
+            if (q2 > q1 && q3 < q2) {
+                // unsafe
+                prediction = 'unsafe';
+            } else if (q2 < q1 && q3 > q2) {
                 prediction = 'UNDER';
-                q4Value = q3 - 1;
-                total = q1 + q2 + q3 + q4Value;
+                total = q1 + q2 + q3 + q3;
                 confidence = 66;
             } else if (q2 > q1 && q3 > q2) {
-                prediction = 'UNDER';
-                q4Value = q3 - 1;
-                total = q1 + q2 + q3 + q4Value;
+                if (q3 <= 25) {
+                    prediction = 'OVER';
+                } else {
+                    prediction = 'UNDER';
+                }
+                total = q1 + q2 + q3 + q3;
                 confidence = 76;
             } else if (q2 < q1 && q3 < q2) {
                 prediction = 'OVER';
-                q4Value = q3 + 1;
-                total = q1 + q2 + q3 + q4Value;
+                total = q1 + q2 + q3 + q3;
                 confidence = 79;
             } else if (q2 === q1 && q3 > q2) {
                 prediction = 'UNDER';
-                q4Value = q3 - 1;
-                total = q1 + q2 + q3 + q4Value;
+                total = q1 + q2 + q3 + q3;
                 confidence = 90;
             } else if (q2 > q1 && q3 === q2) {
                 prediction = 'UNDER';
-                q4Value = q3 - 1;
-                total = q1 + q2 + q3 + q4Value;
+                total = q1 + q2 + q3 + q3;
                 confidence = 90;
             }
 
-            return { prediction, confidence, total, q4Value };
+            return { prediction, confidence, total };
         }
 
         function calculatePrediction() {
@@ -497,36 +503,26 @@
             const team2Result = calculateTeamPrediction(team2Q1, team2Q2, team2Q3);
 
             // Display Team 1 prediction
-            const team1PredCell = document.getElementById('team1Pred');
             const team1TotalCell = document.getElementById('team1Total');
 
             if (team1Result.prediction === 'unsafe') {
-                team1PredCell.innerHTML = '<span class="confidence unsafe">UNSAFE</span>';
-                team1TotalCell.innerHTML = '<span class="prediction-value">-</span>';
+                team1TotalCell.innerHTML = '<span class="confidence unsafe">UNSAFE</span>';
             } else {
-                team1PredCell.innerHTML = `
-                    <span class="prediction-value">${team1Result.q4Value}</span>
-                    <span class="confidence">${team1Result.confidence}%</span>
-                `;
                 team1TotalCell.innerHTML = `
                     <span class="prediction-value">${team1Result.prediction}<br>${team1Result.total}</span>
+                    <span class="confidence">${team1Result.confidence}%</span>
                 `;
             }
 
             // Display Team 2 prediction
-            const team2PredCell = document.getElementById('team2Pred');
             const team2TotalCell = document.getElementById('team2Total');
 
             if (team2Result.prediction === 'unsafe') {
-                team2PredCell.innerHTML = '<span class="confidence unsafe">UNSAFE</span>';
-                team2TotalCell.innerHTML = '<span class="prediction-value">-</span>';
+                team2TotalCell.innerHTML = '<span class="confidence unsafe">UNSAFE</span>';
             } else {
-                team2PredCell.innerHTML = `
-                    <span class="prediction-value">${team2Result.q4Value}</span>
-                    <span class="confidence">${team2Result.confidence}%</span>
-                `;
                 team2TotalCell.innerHTML = `
                     <span class="prediction-value">${team2Result.prediction}<br>${team2Result.total}</span>
+                    <span class="confidence">${team2Result.confidence}%</span>
                 `;
             }
 
@@ -535,8 +531,6 @@
                 team2: document.getElementById('team2Name').value || 'Team 2',
                 team1Scores: [team1Q1, team1Q2, team1Q3],
                 team2Scores: [team2Q1, team2Q2, team2Q3],
-                team1Result,
-                team2Result,
                 timestamp: new Date().toISOString()
             };
 
@@ -545,6 +539,32 @@
                 document.getElementById('saveButtonContainer').innerHTML = 
                     '<button class="save-btn" onclick="saveGame()">💾 Save Game</button>';
             }
+        }
+
+        function resetPrediction() {
+            // Clear all inputs
+            document.getElementById('team1Name').value = '';
+            document.getElementById('team2Name').value = '';
+            document.getElementById('team1Q1').value = '';
+            document.getElementById('team1Q2').value = '';
+            document.getElementById('team1Q3').value = '';
+            document.getElementById('team2Q1').value = '';
+            document.getElementById('team2Q2').value = '';
+            document.getElementById('team2Q3').value = '';
+
+            // Clear color coding
+            document.querySelectorAll('.quarter-input').forEach(input => {
+                input.classList.remove('higher', 'lower');
+            });
+
+            // Clear predictions
+            document.getElementById('team1Total').innerHTML = '<span class="prediction-value">-</span>';
+            document.getElementById('team2Total').innerHTML = '<span class="prediction-value">-</span>';
+
+            // Clear save button
+            document.getElementById('saveButtonContainer').innerHTML = '';
+            
+            currentPrediction = null;
         }
 
         function saveGame() {
@@ -567,7 +587,11 @@
                 return;
             }
 
-            container.innerHTML = games.map((game, index) => `
+            container.innerHTML = games.map((game, index) => {
+                const team1Result = calculateTeamPrediction(game.team1Scores[0], game.team1Scores[1], game.team1Scores[2]);
+                const team2Result = calculateTeamPrediction(game.team2Scores[0], game.team2Scores[1], game.team2Scores[2]);
+
+                return `
                 <div class="game-card">
                     <div class="game-header">
                         <div class="game-date">${new Date(game.timestamp).toLocaleString()}</div>
@@ -580,23 +604,17 @@
                                 <span class="team-scores">Q1: ${game.team1Scores[0]} | Q2: ${game.team1Scores[1]} | Q3: ${game.team1Scores[2]}</span>
                             </div>
                             <div style="text-align: right;">
-                                ${game.team1Result.prediction !== 'unsafe' ? `
-                                    <span class="prediction-result">Q4: ${game.team1Result.q4Value}</span><br>
-                                    <span class="team-scores">${game.team1Result.prediction} ${game.team1Result.total} (${game.team1Result.confidence}%)</span>
+                                ${team1Result.prediction !== 'unsafe' ? `
+                                    <span class="prediction-result">${team1Result.prediction} ${team1Result.total}</span><br>
+                                    <span class="team-scores">${team1Result.confidence}%</span>
                                 ` : '<span class="confidence unsafe">UNSAFE</span>'}
                             </div>
                         </div>
-                        ${game.team1Result.prediction !== 'unsafe' ? `
-                            ${game.verified.team1 === null ? `
-                                <div class="verification">
-                                    <button class="correct-btn" onclick="verifyGame(${index}, 'team1', true)">✓ Correct</button>
-                                    <button class="incorrect-btn" onclick="verifyGame(${index}, 'team1', false)">✗ Incorrect</button>
-                                </div>
-                            ` : `
-                                <span class="verified ${game.verified.team1 ? 'correct' : 'incorrect'}">
-                                    ${game.verified.team1 ? '✓ Correct' : '✗ Incorrect'}
-                                </span>
-                            `}
+                        ${team1Result.prediction !== 'unsafe' ? `
+                            <span class="verified ${game.verified.team1 === null ? 'unverified' : (game.verified.team1 ? 'correct' : 'incorrect')}" 
+                                  onclick="toggleVerification(${index}, 'team1')">
+                                ${game.verified.team1 === null ? '? Not Verified' : (game.verified.team1 ? '✓ Correct' : '✗ Incorrect')}
+                            </span>
                         ` : ''}
                         
                         <div class="team-result" style="margin-top: 15px;">
@@ -605,32 +623,36 @@
                                 <span class="team-scores">Q1: ${game.team2Scores[0]} | Q2: ${game.team2Scores[1]} | Q3: ${game.team2Scores[2]}</span>
                             </div>
                             <div style="text-align: right;">
-                                ${game.team2Result.prediction !== 'unsafe' ? `
-                                    <span class="prediction-result">Q4: ${game.team2Result.q4Value}</span><br>
-                                    <span class="team-scores">${game.team2Result.prediction} ${game.team2Result.total} (${game.team2Result.confidence}%)</span>
+                                ${team2Result.prediction !== 'unsafe' ? `
+                                    <span class="prediction-result">${team2Result.prediction} ${team2Result.total}</span><br>
+                                    <span class="team-scores">${team2Result.confidence}%</span>
                                 ` : '<span class="confidence unsafe">UNSAFE</span>'}
                             </div>
                         </div>
-                        ${game.team2Result.prediction !== 'unsafe' ? `
-                            ${game.verified.team2 === null ? `
-                                <div class="verification">
-                                    <button class="correct-btn" onclick="verifyGame(${index}, 'team2', true)">✓ Correct</button>
-                                    <button class="incorrect-btn" onclick="verifyGame(${index}, 'team2', false)">✗ Incorrect</button>
-                                </div>
-                            ` : `
-                                <span class="verified ${game.verified.team2 ? 'correct' : 'incorrect'}">
-                                    ${game.verified.team2 ? '✓ Correct' : '✗ Incorrect'}
-                                </span>
-                            `}
+                        ${team2Result.prediction !== 'unsafe' ? `
+                            <span class="verified ${game.verified.team2 === null ? 'unverified' : (game.verified.team2 ? 'correct' : 'incorrect')}" 
+                                  onclick="toggleVerification(${index}, 'team2')">
+                                ${game.verified.team2 === null ? '? Not Verified' : (game.verified.team2 ? '✓ Correct' : '✗ Incorrect')}
+                            </span>
                         ` : ''}
                     </div>
                 </div>
-            `).join('');
+            `}).join('');
         }
 
-        function verifyGame(index, team, isCorrect) {
+        function toggleVerification(index, team) {
             const games = JSON.parse(localStorage.getItem('basketballGames') || '[]');
-            games[index].verified[team] = isCorrect;
+            const current = games[index].verified[team];
+            
+            // Cycle through: null -> true -> false -> null
+            if (current === null) {
+                games[index].verified[team] = true;
+            } else if (current === true) {
+                games[index].verified[team] = false;
+            } else {
+                games[index].verified[team] = null;
+            }
+            
             localStorage.setItem('basketballGames', JSON.stringify(games));
             loadHistory();
         }
