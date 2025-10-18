@@ -477,12 +477,12 @@
                 //     a = 1.5;
                 // }
                 prediction = 'UNDER';
-                total = q1 + q2 + q3 + q3 + 2.5;
+                total = q1 + q2 + q3 + q3 - 0.5;
                 // total = q1 + q2 + q3 + Math.ceil((q1 + q2 + q3)/3) + 1.5
                 confidence = 76;
             } else if (q2 < q1 && q3 < q2) {
                 prediction = 'OVER';
-                total = q1 + q2 + q3 + q3 - 2.5;
+                total = q1 + q2 + q3 + q3 + 0.5;
                 // total = q1 + q2 + q3 + Math.ceil((q1 + q2 + q3)/3) - 1.5
                 confidence = 79;
             } else if (q2 === q1 && q3 > q2) {
