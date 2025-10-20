@@ -20,7 +20,7 @@
         }
 
         .container {
-            max-width: 600px;
+            max-width: 500px;
             margin: 0 auto;
         }
 
@@ -65,47 +65,39 @@
             display: block;
         }
 
-        .game-table {
+        .team-names {
             background: #2a2a3e;
             border-radius: 12px;
             padding: 20px;
-            overflow-x: auto;
+            margin-bottom: 15px;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        .team-name-row {
+            margin-bottom: 12px;
         }
 
-        th {
-            padding: 12px 8px;
-            text-align: center;
+        .team-name-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .team-name-row label {
+            display: block;
+            margin-bottom: 5px;
             font-size: 12px;
             color: #a0a0a0;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
-            border-bottom: 2px solid #3a3a4e;
-        }
-
-        td {
-            padding: 15px 8px;
-            text-align: center;
-        }
-
-        .team-name-cell {
-            text-align: left;
-            padding-left: 0;
         }
 
         .team-name {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             background: #1a1a2e;
             border: 2px solid #3a3a4e;
             border-radius: 8px;
             color: #e0e0e0;
-            font-size: 14px;
+            font-size: 16px;
             transition: border-color 0.3s;
         }
 
@@ -114,14 +106,54 @@
             border-color: #ff6b35;
         }
 
+        .game-table {
+            background: #2a2a3e;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .team-row {
+            margin-bottom: 20px;
+        }
+
+        .team-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .team-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ff6b35;
+            margin-bottom: 10px;
+        }
+
+        .quarters {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .quarter-input-wrapper {
+            text-align: center;
+        }
+
+        .quarter-input-wrapper label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 12px;
+            color: #a0a0a0;
+            font-weight: 600;
+        }
+
         .quarter-input {
-            width: 60px;
-            padding: 10px 5px;
+            width: 100%;
+            padding: 12px;
             background: #1a1a2e;
             border: 2px solid #3a3a4e;
             border-radius: 8px;
             color: #e0e0e0;
-            font-size: 16px;
+            font-size: 18px;
             text-align: center;
             transition: all 0.3s;
         }
@@ -131,25 +163,60 @@
             border-color: #ff6b35;
         }
 
-        .quarter-input.higher {
-            border-color: #4ecca3;
-            background: rgba(78, 204, 163, 0.1);
+        .predictions {
+            background: #2a2a3e;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
         }
 
-        .quarter-input.lower {
-            border-color: #ee6c4d;
-            background: rgba(238, 108, 77, 0.1);
+        .prediction-row {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #3a3a4e;
         }
 
-        .prediction-cell {
+        .prediction-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .prediction-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .prediction-team {
             font-weight: 600;
-            font-size: 14px;
+            color: #e0e0e0;
+        }
+
+        .prediction-values {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .prediction-item {
+            flex: 1;
+            text-align: center;
+        }
+
+        .prediction-label {
+            font-size: 11px;
+            color: #a0a0a0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
         }
 
         .prediction-value {
-            display: block;
+            font-size: 24px;
+            font-weight: 700;
             color: #ff6b35;
-            font-size: 18px;
             margin-bottom: 5px;
         }
 
@@ -163,14 +230,9 @@
             font-weight: 700;
         }
 
-        .unsafe {
-            background: #ee6c4d;
-        }
-
         .button-container {
             display: flex;
             gap: 10px;
-            margin-top: 20px;
         }
 
         .predict-btn {
@@ -259,42 +321,71 @@
             color: #a0a0a0;
         }
 
-        .game-details {
-            font-size: 13px;
-            color: #e0e0e0;
-            margin-bottom: 10px;
-        }
-
         .team-result {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #3a3a4e;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: #1a1a2e;
+            border-radius: 8px;
         }
 
         .team-result:last-child {
-            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .team-result-header {
+            font-weight: 600;
+            color: #e0e0e0;
+            margin-bottom: 8px;
         }
 
         .team-scores {
             color: #a0a0a0;
             font-size: 12px;
+            margin-bottom: 10px;
         }
 
-        .prediction-result {
+        .prediction-results {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .prediction-result-item {
+            flex: 1;
+            background: #2a2a3e;
+            padding: 8px;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .prediction-result-label {
+            font-size: 10px;
+            color: #a0a0a0;
+            text-transform: uppercase;
+            margin-bottom: 3px;
+        }
+
+        .prediction-result-value {
+            font-size: 16px;
             color: #ff6b35;
             font-weight: 600;
         }
 
+        .verification-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
         .verified {
-            padding: 6px 12px;
+            flex: 1;
+            padding: 6px;
             border-radius: 6px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
-            display: inline-block;
-            margin-top: 10px;
+            text-align: center;
             cursor: pointer;
             transition: all 0.2s;
+            border: 2px solid transparent;
         }
 
         .verified:hover {
@@ -331,28 +422,6 @@
             font-size: 12px;
             cursor: pointer;
         }
-
-        @media (max-width: 600px) {
-            .quarter-input {
-                width: 50px;
-                padding: 8px 3px;
-                font-size: 14px;
-            }
-
-            th, td {
-                padding: 10px 5px;
-                font-size: 11px;
-            }
-
-            .team-name {
-                font-size: 13px;
-                padding: 8px;
-            }
-
-            .prediction-value {
-                font-size: 16px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -365,55 +434,56 @@
         </div>
 
         <div id="predictPage" class="page active">
-            <div class="game-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Team</th>
-                            <th>Q1</th>
-                            <th>Q2</th>
-                            <th>Q3</th>
-                            <th>Total Prediction</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="team-name-cell">
-                                <input type="text" class="team-name" id="team1Name" placeholder="Team 1">
-                            </td>
-                            <td>
-                                <input type="number" class="quarter-input" id="team1Q1" min="0" data-team="1" data-quarter="1">
-                            </td>
-                            <td>
-                                <input type="number" class="quarter-input" id="team1Q2" min="0" data-team="1" data-quarter="2">
-                            </td>
-                            <td>
-                                <input type="number" class="quarter-input" id="team1Q3" min="0" data-team="1" data-quarter="3">
-                            </td>
-                            <td class="prediction-cell" id="team1Total">
-                                <span class="prediction-value">-</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="team-name-cell">
-                                <input type="text" class="team-name" id="team2Name" placeholder="Team 2">
-                            </td>
-                            <td>
-                                <input type="number" class="quarter-input" id="team2Q1" min="0" data-team="2" data-quarter="1">
-                            </td>
-                            <td>
-                                <input type="number" class="quarter-input" id="team2Q2" min="0" data-team="2" data-quarter="2">
-                            </td>
-                            <td>
-                                <input type="number" class="quarter-input" id="team2Q3" min="0" data-team="2" data-quarter="3">
-                            </td>
-                            <td class="prediction-cell" id="team2Total">
-                                <span class="prediction-value">-</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="team-names">
+                <div class="team-name-row">
+                    <label>Team 1</label>
+                    <input type="text" class="team-name" id="team1Name" placeholder="Enter team name">
+                </div>
+                <div class="team-name-row">
+                    <label>Team 2</label>
+                    <input type="text" class="team-name" id="team2Name" placeholder="Enter team name">
+                </div>
             </div>
+
+            <div class="game-table">
+                <div class="team-row">
+                    <div class="team-label">Team 1 Scores</div>
+                    <div class="quarters">
+                        <div class="quarter-input-wrapper">
+                            <label>Q1</label>
+                            <input type="number" class="quarter-input" id="team1Q1" min="0">
+                        </div>
+                        <div class="quarter-input-wrapper">
+                            <label>Q2</label>
+                            <input type="number" class="quarter-input" id="team1Q2" min="0">
+                        </div>
+                        <div class="quarter-input-wrapper">
+                            <label>Q3</label>
+                            <input type="number" class="quarter-input" id="team1Q3" min="0">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-row">
+                    <div class="team-label">Team 2 Scores</div>
+                    <div class="quarters">
+                        <div class="quarter-input-wrapper">
+                            <label>Q1</label>
+                            <input type="number" class="quarter-input" id="team2Q1" min="0">
+                        </div>
+                        <div class="quarter-input-wrapper">
+                            <label>Q2</label>
+                            <input type="number" class="quarter-input" id="team2Q2" min="0">
+                        </div>
+                        <div class="quarter-input-wrapper">
+                            <label>Q3</label>
+                            <input type="number" class="quarter-input" id="team2Q3" min="0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="predictionsContainer"></div>
 
             <div class="button-container">
                 <button class="predict-btn" onclick="calculatePrediction()">Calculate Prediction</button>
@@ -430,88 +500,29 @@
     <script>
         let currentPrediction = null;
 
-        function addColorCoding() {
-            for (let team = 1; team <= 2; team++) {
-                const q1 = parseInt(document.getElementById(`team${team}Q1`).value) || 0;
-                const q2 = parseInt(document.getElementById(`team${team}Q2`).value) || 0;
-                const q3 = parseInt(document.getElementById(`team${team}Q3`).value) || 0;
-
-                const q2Input = document.getElementById(`team${team}Q2`);
-                const q3Input = document.getElementById(`team${team}Q3`);
-
-                q2Input.classList.remove('higher', 'lower');
-                q3Input.classList.remove('higher', 'lower');
-
-                if (q2 > q1) q2Input.classList.add('higher');
-                else if (q2 < q1) q2Input.classList.add('lower');
-
-                if (q3 > q2) q3Input.classList.add('higher');
-                else if (q3 < q2) q3Input.classList.add('lower');
-            }
-        }
-
-        document.querySelectorAll('input[type="number"]').forEach(input => {
-            input.addEventListener('input', addColorCoding);
-        });
-
         function calculateTeamPrediction(q1, q2, q3) {
-            let prediction = 'Under  Over';
-            let confidence = '85  70';
-            let total = 0;
-            let smax = Math.max(q1,q2,q3);
-            let smin = Math.min(q1,q2,q3);
+            let max = Math.max(q1, q2, q3);
+            let min = Math.min(q1, q2, q3);
+
             if (q1 >= q2 && q2 >= q3) {
               max = Math.ceil(max + max / 2 - 1);
               min = min - 3;
+              // max = 25;
             }
             max = max + 0.5;
             if (q1 <= q2 && q2 <= q3) {
-              min = Math.floor(min + min / 2 - 3);          
+              min = Math.floor(min + min / 2 - 3);
+              // min = 17;
             }
-            min = min - 0.5;                                            
-            let under = q1 + q2 + q3 + max;
-            let over = q1 + q2 + q3 + min;
-            total = under + "  " + over;
-            // if (q2 > q1 && q3 < q2) {
-            //     // unsafe
-            //     prediction = 'unsafe';
-            // } else if (q2 < q1 && q3 > q2) {
-            //     prediction = 'unsafe';
-            //     // prediction = 'UNDER';
-            //     // total = q1 + q2 + q3 + q3 + 1.5;
-            //     // confidence = 66;
-            // } else if (q2 > q1 && q3 > q2) {
-            //     // let a = 0;
-            //     // if (q3 <= 25) {
-            //     //     prediction = 'OVER';
-            //     //     a = -1.5;
-            //     // } else {
-            //     //     prediction = 'UNDER';
-            //     //     a = 1.5;
-            //     // }
-            //     prediction = 'UNDER';
-            //     total = q1 + q2 + q3 + q3 - 0.5;
-            //     // total = q1 + q2 + q3 + Math.ceil((q1 + q2 + q3)/3) + 1.5
-            //     confidence = 76;
-            // } else if (q2 < q1 && q3 < q2) {
-            //     prediction = 'OVER';
-            //     total = q1 + q2 + q3 + q3 + 0.5;
-            //     // total = q1 + q2 + q3 + Math.ceil((q1 + q2 + q3)/3) - 1.5
-            //     confidence = 79;
-            // } else if (q2 === q1 && q3 > q2) {
-            //     // prediction = 'UNDER';
-            //     // total = q1 + q2 + q3 + q3 + 1.5;
-            //     // confidence = 90;
-            //     prediction = 'unsafe';
-            // } else if (q2 > q1 && q3 === q2) {
-            //     // prediction = 'UNDER';
-            //     // total = q1 + q2 + q3 + q3 + 1.5;
-            //     // confidence = 90;
-            //     prediction = 'unsafe';
-            // }
+            min = min - 0.5;            
             
-
-            return { prediction, confidence, total };
+            const under = q1 + q2 + q3 + max;
+            const over = q1 + q2 + q3 + min;
+            
+            return {
+                under: { total: under, confidence: 85 },
+                over: { total: over, confidence: 70 }
+            };
         }
 
         function calculatePrediction() {
@@ -522,50 +533,65 @@
             const team2Q2 = parseInt(document.getElementById('team2Q2').value) || 0;
             const team2Q3 = parseInt(document.getElementById('team2Q3').value) || 0;
 
+            const team1Name = document.getElementById('team1Name').value || 'Team 1';
+            const team2Name = document.getElementById('team2Name').value || 'Team 2';
+
             const team1Result = calculateTeamPrediction(team1Q1, team1Q2, team1Q3);
             const team2Result = calculateTeamPrediction(team2Q1, team2Q2, team2Q3);
 
-            // Display Team 1 prediction
-            const team1TotalCell = document.getElementById('team1Total');
-
-            if (team1Result.prediction === 'unsafe') {
-                team1TotalCell.innerHTML = '<span class="confidence unsafe">UNSAFE</span>';
-            } else {
-                team1TotalCell.innerHTML = `
-                    <span class="prediction-value">${team1Result.prediction}<br>${team1Result.total}</span>
-                    <span class="confidence">${team1Result.confidence}%</span>
-                `;
-            }
-
-            // Display Team 2 prediction
-            const team2TotalCell = document.getElementById('team2Total');
-
-            if (team2Result.prediction === 'unsafe') {
-                team2TotalCell.innerHTML = '<span class="confidence unsafe">UNSAFE</span>';
-            } else {
-                team2TotalCell.innerHTML = `
-                    <span class="prediction-value">${team2Result.prediction}<br>${team2Result.total}</span>
-                    <span class="confidence">${team2Result.confidence}%</span>
-                `;
-            }
+            const container = document.getElementById('predictionsContainer');
+            container.innerHTML = `
+                <div class="predictions">
+                    <div class="prediction-row">
+                        <div class="prediction-header">
+                            <span class="prediction-team">${team1Name}</span>
+                        </div>
+                        <div class="prediction-values">
+                            <div class="prediction-item">
+                                <div class="prediction-label">Under</div>
+                                <div class="prediction-value">${team1Result.under.total}</div>
+                                <span class="confidence">${team1Result.under.confidence}%</span>
+                            </div>
+                            <div class="prediction-item">
+                                <div class="prediction-label">Over</div>
+                                <div class="prediction-value">${team1Result.over.total}</div>
+                                <span class="confidence">${team1Result.over.confidence}%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prediction-row">
+                        <div class="prediction-header">
+                            <span class="prediction-team">${team2Name}</span>
+                        </div>
+                        <div class="prediction-values">
+                            <div class="prediction-item">
+                                <div class="prediction-label">Under</div>
+                                <div class="prediction-value">${team2Result.under.total}</div>
+                                <span class="confidence">${team2Result.under.confidence}%</span>
+                            </div>
+                            <div class="prediction-item">
+                                <div class="prediction-label">Over</div>
+                                <div class="prediction-value">${team2Result.over.total}</div>
+                                <span class="confidence">${team2Result.over.confidence}%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
 
             currentPrediction = {
-                team1: document.getElementById('team1Name').value || 'Team 1',
-                team2: document.getElementById('team2Name').value || 'Team 2',
+                team1: team1Name,
+                team2: team2Name,
                 team1Scores: [team1Q1, team1Q2, team1Q3],
                 team2Scores: [team2Q1, team2Q2, team2Q3],
                 timestamp: new Date().toISOString()
             };
 
-            // Show save button if at least one prediction is valid
-            if (team1Result.prediction !== 'unsafe' || team2Result.prediction !== 'unsafe') {
-                document.getElementById('saveButtonContainer').innerHTML = 
-                    '<button class="save-btn" onclick="saveGame()">💾 Save Game</button>';
-            }
+            document.getElementById('saveButtonContainer').innerHTML = 
+                '<button class="save-btn" onclick="saveGame()">💾 Save Game</button>';
         }
 
         function resetPrediction() {
-            // Clear all inputs
             document.getElementById('team1Name').value = '';
             document.getElementById('team2Name').value = '';
             document.getElementById('team1Q1').value = '';
@@ -574,19 +600,8 @@
             document.getElementById('team2Q1').value = '';
             document.getElementById('team2Q2').value = '';
             document.getElementById('team2Q3').value = '';
-
-            // Clear color coding
-            document.querySelectorAll('.quarter-input').forEach(input => {
-                input.classList.remove('higher', 'lower');
-            });
-
-            // Clear predictions
-            document.getElementById('team1Total').innerHTML = '<span class="prediction-value">-</span>';
-            document.getElementById('team2Total').innerHTML = '<span class="prediction-value">-</span>';
-
-            // Clear save button
+            document.getElementById('predictionsContainer').innerHTML = '';
             document.getElementById('saveButtonContainer').innerHTML = '';
-            
             currentPrediction = null;
         }
 
@@ -594,7 +609,13 @@
             if (!currentPrediction) return;
 
             const games = JSON.parse(localStorage.getItem('basketballGames') || '[]');
-            games.unshift({ ...currentPrediction, verified: { team1: null, team2: null } });
+            games.unshift({ 
+                ...currentPrediction, 
+                verified: { 
+                    team1: { under: null, over: null },
+                    team2: { under: null, over: null }
+                }
+            });
             localStorage.setItem('basketballGames', JSON.stringify(games));
 
             alert('Game saved successfully!');
@@ -620,60 +641,71 @@
                         <div class="game-date">${new Date(game.timestamp).toLocaleString()}</div>
                         <button class="delete-btn" onclick="deleteGame(${index})">Delete</button>
                     </div>
-                    <div class="game-details">
-                        <div class="team-result">
-                            <div>
-                                <strong>${game.team1}</strong><br>
-                                <span class="team-scores">Q1: ${game.team1Scores[0]} | Q2: ${game.team1Scores[1]} | Q3: ${game.team1Scores[2]}</span>
+                    
+                    <div class="team-result">
+                        <div class="team-result-header">${game.team1}</div>
+                        <div class="team-scores">Q1: ${game.team1Scores[0]} | Q2: ${game.team1Scores[1]} | Q3: ${game.team1Scores[2]}</div>
+                        <div class="prediction-results">
+                            <div class="prediction-result-item">
+                                <div class="prediction-result-label">Under</div>
+                                <div class="prediction-result-value">${team1Result.under.total}</div>
                             </div>
-                            <div style="text-align: right;">
-                                ${team1Result.prediction !== 'unsafe' ? `
-                                    <span class="prediction-result">${team1Result.prediction} ${team1Result.total}</span><br>
-                                    <span class="team-scores">${team1Result.confidence}%</span>
-                                ` : '<span class="confidence unsafe">UNSAFE</span>'}
-                            </div>
-                        </div>
-                        ${team1Result.prediction !== 'unsafe' ? `
-                            <span class="verified ${game.verified.team1 === null ? 'unverified' : (game.verified.team1 ? 'correct' : 'incorrect')}" 
-                                  onclick="toggleVerification(${index}, 'team1')">
-                                ${game.verified.team1 === null ? '? Not Verified' : (game.verified.team1 ? '✓ Correct' : '✗ Incorrect')}
-                            </span>
-                        ` : ''}
-                        
-                        <div class="team-result" style="margin-top: 15px;">
-                            <div>
-                                <strong>${game.team2}</strong><br>
-                                <span class="team-scores">Q1: ${game.team2Scores[0]} | Q2: ${game.team2Scores[1]} | Q3: ${game.team2Scores[2]}</span>
-                            </div>
-                            <div style="text-align: right;">
-                                ${team2Result.prediction !== 'unsafe' ? `
-                                    <span class="prediction-result">${team2Result.prediction} ${team2Result.total}</span><br>
-                                    <span class="team-scores">${team2Result.confidence}%</span>
-                                ` : '<span class="confidence unsafe">UNSAFE</span>'}
+                            <div class="prediction-result-item">
+                                <div class="prediction-result-label">Over</div>
+                                <div class="prediction-result-value">${team1Result.over.total}</div>
                             </div>
                         </div>
-                        ${team2Result.prediction !== 'unsafe' ? `
-                            <span class="verified ${game.verified.team2 === null ? 'unverified' : (game.verified.team2 ? 'correct' : 'incorrect')}" 
-                                  onclick="toggleVerification(${index}, 'team2')">
-                                ${game.verified.team2 === null ? '? Not Verified' : (game.verified.team2 ? '✓ Correct' : '✗ Incorrect')}
+                        <div class="verification-buttons">
+                            <span class="verified ${game.verified.team1.under === null ? 'unverified' : (game.verified.team1.under ? 'correct' : 'incorrect')}" 
+                                  onclick="toggleVerification(${index}, 'team1', 'under')">
+                                ${game.verified.team1.under === null ? 'U: ?' : (game.verified.team1.under ? 'U: ✓' : 'U: ✗')}
                             </span>
-                        ` : ''}
+                            <span class="verified ${game.verified.team1.over === null ? 'unverified' : (game.verified.team1.over ? 'correct' : 'incorrect')}" 
+                                  onclick="toggleVerification(${index}, 'team1', 'over')">
+                                ${game.verified.team1.over === null ? 'O: ?' : (game.verified.team1.over ? 'O: ✓' : 'O: ✗')}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="team-result">
+                        <div class="team-result-header">${game.team2}</div>
+                        <div class="team-scores">Q1: ${game.team2Scores[0]} | Q2: ${game.team2Scores[1]} | Q3: ${game.team2Scores[2]}</div>
+                        <div class="prediction-results">
+                            <div class="prediction-result-item">
+                                <div class="prediction-result-label">Under</div>
+                                <div class="prediction-result-value">${team2Result.under.total}</div>
+                            </div>
+                            <div class="prediction-result-item">
+                                <div class="prediction-result-label">Over</div>
+                                <div class="prediction-result-value">${team2Result.over.total}</div>
+                            </div>
+                        </div>
+                        <div class="verification-buttons">
+                            <span class="verified ${game.verified.team2.under === null ? 'unverified' : (game.verified.team2.under ? 'correct' : 'incorrect')}" 
+                                  onclick="toggleVerification(${index}, 'team2', 'under')">
+                                ${game.verified.team2.under === null ? 'U: ?' : (game.verified.team2.under ? 'U: ✓' : 'U: ✗')}
+                            </span>
+                            <span class="verified ${game.verified.team2.over === null ? 'unverified' : (game.verified.team2.over ? 'correct' : 'incorrect')}" 
+                                  onclick="toggleVerification(${index}, 'team2', 'over')">
+                                ${game.verified.team2.over === null ? 'O: ?' : (game.verified.team2.over ? 'O: ✓' : 'O: ✗')}
+                            </span>
+                        </div>
                     </div>
                 </div>
             `}).join('');
         }
 
-        function toggleVerification(index, team) {
+        function toggleVerification(index, team, type) {
             const games = JSON.parse(localStorage.getItem('basketballGames') || '[]');
-            const current = games[index].verified[team];
+            const current = games[index].verified[team][type];
             
             // Cycle through: null -> true -> false -> null
             if (current === null) {
-                games[index].verified[team] = true;
+                games[index].verified[team][type] = true;
             } else if (current === true) {
-                games[index].verified[team] = false;
+                games[index].verified[team][type] = false;
             } else {
-                games[index].verified[team] = null;
+                games[index].verified[team][type] = null;
             }
             
             localStorage.setItem('basketballGames', JSON.stringify(games));
