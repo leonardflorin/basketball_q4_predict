@@ -455,47 +455,61 @@
         });
 
         function calculateTeamPrediction(q1, q2, q3) {
-            let prediction = 'unsafe';
-            let confidence = 0;
+            let prediction = 'Under  Over';
+            let confidence = '85  70';
             let total = 0;
-
-            if (q2 > q1 && q3 < q2) {
-                // unsafe
-                prediction = 'unsafe';
-            } else if (q2 < q1 && q3 > q2) {
-                prediction = 'unsafe';
-                // prediction = 'UNDER';
-                // total = q1 + q2 + q3 + q3 + 1.5;
-                // confidence = 66;
-            } else if (q2 > q1 && q3 > q2) {
-                // let a = 0;
-                // if (q3 <= 25) {
-                //     prediction = 'OVER';
-                //     a = -1.5;
-                // } else {
-                //     prediction = 'UNDER';
-                //     a = 1.5;
-                // }
-                prediction = 'UNDER';
-                total = q1 + q2 + q3 + q3 - 0.5;
-                // total = q1 + q2 + q3 + Math.ceil((q1 + q2 + q3)/3) + 1.5
-                confidence = 76;
-            } else if (q2 < q1 && q3 < q2) {
-                prediction = 'OVER';
-                total = q1 + q2 + q3 + q3 + 0.5;
-                // total = q1 + q2 + q3 + Math.ceil((q1 + q2 + q3)/3) - 1.5
-                confidence = 79;
-            } else if (q2 === q1 && q3 > q2) {
-                // prediction = 'UNDER';
-                // total = q1 + q2 + q3 + q3 + 1.5;
-                // confidence = 90;
-                prediction = 'unsafe';
-            } else if (q2 > q1 && q3 === q2) {
-                // prediction = 'UNDER';
-                // total = q1 + q2 + q3 + q3 + 1.5;
-                // confidence = 90;
-                prediction = 'unsafe';
+            let smax = Math.max(q1,q2,q3);
+            let smin = Math.min(q1,q2,q3);
+            if (q1 >= q2 && q2 >= q3) {
+              max = Math.ceil(max + max / 2 - 1);
+              min = min - 3;
             }
+            max = max + 0.5;
+            if (q1 <= q2 && q2 <= q3) {
+              min = Math.floor(min + min / 2 - 3);          
+            }
+            min = min - 0.5;                                            
+            let under = q1 + q2 + q3 + max;
+            let over = q1 + q2 + q3 + min;
+            total = under + "  " + over;
+            // if (q2 > q1 && q3 < q2) {
+            //     // unsafe
+            //     prediction = 'unsafe';
+            // } else if (q2 < q1 && q3 > q2) {
+            //     prediction = 'unsafe';
+            //     // prediction = 'UNDER';
+            //     // total = q1 + q2 + q3 + q3 + 1.5;
+            //     // confidence = 66;
+            // } else if (q2 > q1 && q3 > q2) {
+            //     // let a = 0;
+            //     // if (q3 <= 25) {
+            //     //     prediction = 'OVER';
+            //     //     a = -1.5;
+            //     // } else {
+            //     //     prediction = 'UNDER';
+            //     //     a = 1.5;
+            //     // }
+            //     prediction = 'UNDER';
+            //     total = q1 + q2 + q3 + q3 - 0.5;
+            //     // total = q1 + q2 + q3 + Math.ceil((q1 + q2 + q3)/3) + 1.5
+            //     confidence = 76;
+            // } else if (q2 < q1 && q3 < q2) {
+            //     prediction = 'OVER';
+            //     total = q1 + q2 + q3 + q3 + 0.5;
+            //     // total = q1 + q2 + q3 + Math.ceil((q1 + q2 + q3)/3) - 1.5
+            //     confidence = 79;
+            // } else if (q2 === q1 && q3 > q2) {
+            //     // prediction = 'UNDER';
+            //     // total = q1 + q2 + q3 + q3 + 1.5;
+            //     // confidence = 90;
+            //     prediction = 'unsafe';
+            // } else if (q2 > q1 && q3 === q2) {
+            //     // prediction = 'UNDER';
+            //     // total = q1 + q2 + q3 + q3 + 1.5;
+            //     // confidence = 90;
+            //     prediction = 'unsafe';
+            // }
+            
 
             return { prediction, confidence, total };
         }
